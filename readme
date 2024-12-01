@@ -1,36 +1,85 @@
 
-### Пошаговый гайд по запуску проекта  :  a step-by-step guide to run the project:
+### Пошаговый гайд по запуску проекта calendar_app :  a step-by-step guide to run the project:
 
 # 1. Создаем venv : Create a virtual environment:
 
 #осуществить следующую команду run the following command:(a terminal or command prompt):
 
 
-python -m venv python_project
+python -m venv calendar_app
 
  
 # 2: Активируем venv : Activate the virtual environment
 
 
-python_project\Scripts\activate  (on Windows)
-\python_project> cd python_project
-\python_project\python_project> cd Scripts
-\python_project\python_project\Scripts> Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
-\python_project\python_project\Scripts> .\activate
+calendar_app\Scripts\activate  (on Windows)
+\calendar_app> cd calendar_app
+\calendar_app\calendar_app> cd Scripts
+\calendar_app\calendar_app\Scripts> Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+\calendar_app\calendar_app\Scripts> .\activate
 
-source python_project/bin/activate  (on macOS/Linux)
+source calendar_app/bin/activate  (on macOS/Linux)
 
 
 # 3: Устанавливаем зависимости, используя менеджер пакетов pip:  Install the required dependencies using pip:
 
 
-pip install jupyter notebook 
-pip install 
+pip install flask 
+pip install flask_sqlalchemy
 
 
 # 4: Запускаем приложение: Run the application: 
 
 
-python main.py
+python api.py
 
 
+# Эта команда запустит Flask development server. 
+#Получить доступ к созданному приложению по адресу http://localhost:5000 (web browser, Postman).
+
+
+# 5. Создаем новое событие: Create a new event:
+
+curl -X POST -H "Content-Type: application/json" -d '{"date": "2023-03-01", "title": "Event 1", "text": "This is the first event"}'
+ http://localhost:5000/api/v1/calendar
+Expected response: 201 Created with the newly created events data.
+
+# 6. Get a list of all events:
+
+curl -X GET http://localhost:5000/api/v1/calendar
+Expected response: A list of all events in the calendar.
+
+# 7. Get a specific event:
+
+curl -X GET http://localhost:5000/api/v1/calendar/1
+Expected response: The data for the event with ID 1
+
+# 8.  Update an existing event:
+
+curl -X PUT -H "Content-Type: application/json" -d '{"title": "Updated title", "text": "Updated text"}'
+ http://localhost:5000/api/v1/calendar/1
+Expected response: The updated events data.
+
+# 9. Delete an existing event:
+
+curl -X DELETE 
+Expected response: {"message": "Event deleted"}
+
+
+
+
+
+Техническое задание: Сервис для работы с Календарем.
+
+Требования:
+
+— API интерфейс CRUD — Добавление / Список / Чтение / Обновление / Удаление
+— модель данных "Событие": ID, Дата, Заголовок, Текст
+— локальное хранилище данных
+— максимальная длина заголовка — 30 символов
+— максимальная длина поля Текст — 200 символов
+— нельзя добавить больше одного события в день
+— API интерфейс: /api/v1/calendar/… (по аналогии с заметкой)
+— формат данных: "ГГГГ-ММ-ДД|заголовок|текст" (по аналогии с заметкой)
+
+Написать и протестировать приложение, по аналогии с сервисом заметок из Воркшопа.
