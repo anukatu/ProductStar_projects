@@ -1,0 +1,36 @@
+
+### Пошаговый гайд по запуску проекта  :  a step-by-step guide to run the project:
+
+# 1. Создаем venv : Create a virtual environment:
+
+#осуществить следующую команду run the following command:(a terminal or command prompt):
+
+
+python -m venv python_project
+
+ 
+# 2: Активируем venv : Activate the virtual environment
+
+
+python_project\Scripts\activate  (on Windows)
+\python_project> cd python_project
+\python_project\python_project> cd Scripts
+\python_project\python_project\Scripts> Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+\python_project\python_project\Scripts> .\activate
+
+source python_project/bin/activate  (on macOS/Linux)
+
+
+# 3: Устанавливаем зависимости, используя менеджер пакетов pip:  Install the required dependencies using pip:
+
+
+pip install jupyter notebook 
+pip install 
+
+
+# 4: Запускаем приложение: Run the application: 
+
+
+python main.py
+
+
